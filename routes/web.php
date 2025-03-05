@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\UserCatalogController::class, 'welcome'])->name('welcome');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return Auth::check() && Auth::user()->hasRole('user') ? redirect()->route('welcome') : view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -29,5 +28,18 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('catalogs', \App\Http\Controllers\CatalogController::class)->middleware('auth');
+
+Route::get('payment', [App\Http\Controllers\PaymentController::class, 'admin'])->name('payment.admin');
+Route::patch('payment/{payment_id}/approve', [App\Http\Controllers\PaymentController::class, 'paymentApprove'])->name('payment.approve');
+Route::patch('payment/{payment_id}/reject', [App\Http\Controllers\PaymentController::class, 'paymentReject'])->name('payment.reject');
+
+Route::get('/user/catalog', [App\Http\Controllers\UserCatalogController::class, 'index'])->name('user-catalog');
+Route::post('/order/store', [App\Http\Controllers\UserCatalogController::class, 'store'])->name('order.store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/orders/payment', [App\Http\Controllers\PaymentController::class, 'index'])->name('order.payment');
+    Route::post('/payment/process', [App\Http\Controllers\PaymentController::class, 'processPayment'])->name('payment.process');
+});
+
 
 require __DIR__.'/auth.php';

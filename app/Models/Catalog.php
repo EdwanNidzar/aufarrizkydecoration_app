@@ -17,4 +17,9 @@ class Catalog extends Model
         'harga',
         'image'
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
