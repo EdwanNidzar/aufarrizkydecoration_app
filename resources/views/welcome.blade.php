@@ -44,9 +44,20 @@
                             <a class="nav-link active" aria-current="page" href="#contact">Kontak</a>
                         </li>
                         @if (Auth::check())
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"
-                                    href="{{ route('dashboard') }}">Dashboard</a>
+                            <li class="nav-item dropdown ms-lg-auto">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
                         @else
                             <li class="nav-item">
@@ -112,7 +123,8 @@
                 formulir pemesanan.</li>
             <li class="list-group-item">4. Bila Dirasa sudah sesuai, pengguna dapat meng klik tombol pesan.</li>
             <li class="list-group-item">5. Lalu pengguna akan diarahkan ke menu pembayaran</li>
-            <li class="list-group-item">6. Lakukan pembayaran ke rekening yang sudah tertera dan upload bukti pembayaran
+            <li class="list-group-item">6. Lakukan pembayaran ke rekening yang sudah tertera dan upload bukti
+                pembayaran
             </li>
             <li class="list-group-item">7. Setelah upload, tunggu admin menyetujui pembayaran anda</li>
             <li class="list-group-item">8. Setelah status sudah di setujui, tim Aufarrizky Decoration akan menghubungi

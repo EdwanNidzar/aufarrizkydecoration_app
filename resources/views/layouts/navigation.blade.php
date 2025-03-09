@@ -16,7 +16,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if (auth()->user()->hasRole('bawaslu-provinsi'))
+                    @if (auth()->user()->hasRole('admin'))
                     <x-nav-link :href="route('catalogs.index')" :active="request()->routeIs('catalogs.*')">
                         {{ __('Catalogs') }}
                     </x-nav-link>
@@ -80,7 +80,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            @if (auth()->user()->hasRole('bawaslu-provinsi'))
+            @if (auth()->user()->hasRole('admin'))
             <x-responsive-nav-link :href="route('catalogs.index')" :active="request()->routeIs('catalogs.*')">
                 {{ __('Catalogs') }}
             </x-responsive-nav-link>

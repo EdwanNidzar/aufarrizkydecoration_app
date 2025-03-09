@@ -44,16 +44,40 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link active" href="{{ route('user-catalog') }}">Catalog</a>
+                        <li class="nav-item ">
+                            <a class="nav-link active" aria-current="page" href="{{ route('welcome') }}">Home</a>
                         </li>
-                        <li class="nav-item"><a class="nav-link active" href="{{ route('order.payment') }}">Bayar</a>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                                href="{{ route('user-catalog') }}">Catalog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{{ route('order.payment') }}">Bayar</a>
                         </li>
                         @if (Auth::check())
-                            <li class="nav-item"><a class="nav-link active"
-                                    href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="nav-item dropdown ms-lg-auto">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profile</a></li>
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">Logout</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
                         @else
-                            <li class="nav-item"><a class="nav-link active" href="{{ route('login') }}">Login</a></li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                    href="{{ route('register') }}">Register</a>
+                            </li>
                         @endif
                     </ul>
                 </div>
