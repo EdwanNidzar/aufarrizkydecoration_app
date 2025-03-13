@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [App\Http\Controllers\UserCatalogController::class, 'welcome'])->name('welcome');
 
-Route::get('/dashboard', function () {
-    return Auth::check() && Auth::user()->hasRole('user') ? redirect()->route('welcome') : view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/export-orders', [App\Http\Controllers\DashboardController::class, 'exportOrders']);
+Route::post('/import-orders', [App\Http\Controllers\DashboardController::class, 'importOrders']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
