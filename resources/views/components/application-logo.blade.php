@@ -1,3 +1,3 @@
 <div align="center">
-    <img src="{{ asset('assets/logo.png') }}" alt="Logo" width="30%" height="30%">
+    <img src="{{ asset('img/Aufadecorr-Logo.png') }}" alt="Logo" width="30%" height="30%">
 </div>

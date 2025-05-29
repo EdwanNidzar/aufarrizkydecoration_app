@@ -425,3 +425,49 @@ font-weight: 700;
 }
 
 /* End Footer */
+
+/* Hero Slider Styles */
+.hero-slider-container {
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.hero-slide-img {
+    width: 100%;
+    height: 560px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.hero-slide-content {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    text-align: center;
+}
+
+/* Sesuaikan ukuran untuk mobile */
+@media (max-width: 768px) {
+    .hero-slide-img {
+        height: 400px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-slide-img {
+        height: 300px;
+    }
+}
